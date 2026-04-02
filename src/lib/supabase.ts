@@ -43,7 +43,7 @@ export type Note = {
   id: string;
   content: string;
   author: string;
-  theme: 'white' | 'light-blue' | 'dark-blue';
+  theme: 'white' | 'light-blue' | 'dark-blue' | 'mint-green' | 'lavender' | 'soft-pink' | 'sun-peach';
   x_percent: number;
   y_percent: number;
   rotation: number;

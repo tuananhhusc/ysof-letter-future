@@ -10,6 +10,10 @@ const themes: { value: Theme; label: string; bg: string; ring: string }[] = [
   { value: 'white', label: 'Trắng', bg: 'bg-[#fffef7]', ring: 'ring-amber-200' },
   { value: 'light-blue', label: 'Xanh nhạt', bg: 'bg-[#f0f9ff]', ring: 'ring-sky-300' },
   { value: 'dark-blue', label: 'Xanh đậm', bg: 'bg-[#e0f2fe]', ring: 'ring-blue-400' },
+  { value: 'mint-green', label: 'Xanh lá mint', bg: 'bg-[#f0fdf4]', ring: 'ring-green-300' },
+  { value: 'lavender', label: 'Tím oải hương', bg: 'bg-[#f5f3ff]', ring: 'ring-violet-300' },
+  { value: 'soft-pink', label: 'Hồng nhạt', bg: 'bg-[#fdf2f8]', ring: 'ring-pink-300' },
+  { value: 'sun-peach', label: 'Cam đào', bg: 'bg-[#fff7ed]', ring: 'ring-orange-200' },
 ];
 
 type WriteNoteModalProps = {

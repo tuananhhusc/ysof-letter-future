@@ -20,6 +20,26 @@ const themeStyles: Record<Note['theme'], { bg: string; text: string; shadow: str
     text: 'text-blue-950',
     shadow: 'shadow-[0_4px_16px_rgba(30,64,175,0.1)]',
   },
+  'mint-green': {
+    bg: 'bg-[#f0fdf4]',
+    text: 'text-green-900',
+    shadow: 'shadow-[0_4px_16px_rgba(22,163,74,0.06)]',
+  },
+  lavender: {
+    bg: 'bg-[#f5f3ff]',
+    text: 'text-violet-900',
+    shadow: 'shadow-[0_4px_16px_rgba(124,58,237,0.06)]',
+  },
+  'soft-pink': {
+    bg: 'bg-[#fdf2f8]',
+    text: 'text-pink-900',
+    shadow: 'shadow-[0_4px_16px_rgba(219,39,119,0.06)]',
+  },
+  'sun-peach': {
+    bg: 'bg-[#fff7ed]',
+    text: 'text-orange-900',
+    shadow: 'shadow-[0_4px_16px_rgba(234,88,12,0.06)]',
+  },
 };
 
 function relativeTime(dateStr: string): string {
