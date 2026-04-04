@@ -18,8 +18,7 @@ export default function Home() {
 
   return (
     <div 
-      className="relative flex flex-col flex-1 items-center justify-center min-h-[calc(100vh-100px)] p-4 sm:p-8 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/ysof1.svg')" }}
+      className="relative flex flex-col flex-1 items-center justify-center min-h-[calc(100vh-100px)] p-4 sm:p-8 bg-cover bg-center bg-no-repeat bg-[url('/ysof3.svg')] sm:bg-[url('/ysof1.svg')]"
     >
       {/* Particles layer */}
       <Particles />

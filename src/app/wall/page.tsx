@@ -157,8 +157,7 @@ export default function WallPage() {
 
   return (
     <div 
-      className="relative flex flex-col min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/ysof2.svg')" }}
+      className="relative flex flex-col min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/ysof4.svg')] sm:bg-[url('/ysof2.svg')]"
     >
       {/* Particles layer */}
       <Particles />
