@@ -13,7 +13,61 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 const BATCH_SIZE = 30;
-const NOTES_PER_PAGE = 15;
+const NOTES_PER_PAGE = 12;
+
+// ── Grid layout algorithm ────────────────────────────────────────
+// Distributes notes in a grid with brick-pattern stagger + deterministic jitter
+// to prevent overlap while keeping an organic, hand-placed look.
+function computeGridLayout(
+  notes: Note[],
+): { x: number; y: number }[] {
+  const count = notes.length;
+  if (count === 0) return [];
+
+  // Determine optimal grid dimensions
+  let cols: number, rows: number;
+  if (count <= 2) { cols = 2; rows = 1; }
+  else if (count <= 4) { cols = 2; rows = 2; }
+  else if (count <= 6) { cols = 3; rows = 2; }
+  else if (count <= 9) { cols = 3; rows = 3; }
+  else { cols = 4; rows = 3; }
+
+  // Safe margins (% of container)
+  const PAD_TOP = 8;
+  const PAD_BOTTOM = 10;
+  const PAD_X = 8;
+
+  const usableW = 100 - 2 * PAD_X;   // 84%
+  const usableH = 100 - PAD_TOP - PAD_BOTTOM; // 82%
+
+  const cellW = usableW / cols;
+  const cellH = usableH / rows;
+
+  return notes.map((note, i) => {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+
+    // Brick-pattern stagger: odd rows shift right by half a cell
+    const staggerX = row % 2 === 1 ? cellW * 0.25 : 0;
+
+    // Deterministic jitter derived from the note's stored random values
+    // This ensures the same note always gets the same jitter.
+    const seed1 = ((note.x_percent * 7 + note.y_percent * 13 + i * 17) % 100) / 100;
+    const seed2 = ((note.y_percent * 11 + note.x_percent * 3 + i * 7) % 100) / 100;
+    const jitterX = (seed1 - 0.5) * cellW * 0.3;
+    const jitterY = (seed2 - 0.5) * cellH * 0.25;
+
+    const x = PAD_X + cellW * (col + 0.5) + staggerX + jitterX;
+    const y = PAD_TOP + cellH * (row + 0.5) + jitterY;
+
+    // Clamp so notes never go off-screen
+    return {
+      x: Math.max(6, Math.min(94, x)),
+      y: Math.max(6, Math.min(92, y)),
+    };
+  });
+}
+// ─────────────────────────────────────────────────────────────────
 
 export default function WallPage() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -255,7 +309,8 @@ export default function WallPage() {
         <div className="flex flex-col w-full relative">
           {Array.from({ length: Math.ceil(visibleNotes.length / NOTES_PER_PAGE) }).map((_, pageIndex) => {
             const pageNotes = visibleNotes.slice(pageIndex * NOTES_PER_PAGE, (pageIndex + 1) * NOTES_PER_PAGE);
-            
+            const positions = computeGridLayout(pageNotes);
+
             return (
               <div 
                 key={pageIndex} 
@@ -267,6 +322,8 @@ export default function WallPage() {
                     note={note}
                     index={pageIndex * NOTES_PER_PAGE + idxInPage}
                     isNew={newNoteIds.has(note.id)}
+                    layoutX={positions[idxInPage]?.x}
+                    layoutY={positions[idxInPage]?.y}
                     onClick={setSelectedNote}
                     onLikeUpdate={handleLikeUpdate}
                   />

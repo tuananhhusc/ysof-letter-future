@@ -62,11 +62,13 @@ type StickyNoteProps = {
   note: Note;
   index: number;
   isNew?: boolean;
+  layoutX?: number;
+  layoutY?: number;
   onClick?: (note: Note) => void;
   onLikeUpdate?: (noteId: string, newLikes: number) => void;
 };
 
-export default function StickyNote({ note, index, isNew = false, onClick, onLikeUpdate }: StickyNoteProps) {
+export default function StickyNote({ note, index, isNew = false, layoutX, layoutY, onClick, onLikeUpdate }: StickyNoteProps) {
   const [mounted, setMounted] = useState(false);
   const [likes, setLikes] = useState(note.likes || 0);
   const [hasLiked, setHasLiked] = useState(false);
@@ -119,8 +121,8 @@ export default function StickyNote({ note, index, isNew = false, onClick, onLike
     <motion.div
       className="absolute w-[160px] sm:w-[180px] md:w-[200px] cursor-pointer group"
       style={{
-        left: `${note.x_percent}%`,
-        top: `${note.y_percent}%`,
+        left: `${layoutX ?? note.x_percent}%`,
+        top: `${layoutY ?? note.y_percent}%`,
         zIndex: index + 1,
         transform: 'translate(-50%, -50%)',
       }}

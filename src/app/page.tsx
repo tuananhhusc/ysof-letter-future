@@ -35,18 +35,20 @@ export default function Home() {
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
         >
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-[3.5rem] font-bold leading-tight mb-8 tracking-wide pb-1"
+            className="text-3xl sm:text-5xl md:text-[3.5rem] font-bold leading-tight mb-8 tracking-wide pb-1"
             style={{ filter: 'drop-shadow(0 4px 12px rgba(14, 165, 233, 0.15))' }}
             initial={{ opacity: 0, filter: 'blur(4px)' }}
             animate={{ opacity: 1, filter: 'blur(0px)' }}
             transition={{ delay: 0.2, duration: 1.2, ease: "easeOut" }}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-sky-400 to-blue-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-br from-sky-400 to-blue-600 block sm:inline-block">
               Hãy Để Lại Một Mảnh Ký Ức
-              <br className="hidden sm:block" />
+            </span>
+            <br className="hidden sm:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-br from-sky-400 to-blue-600 block sm:inline-block">
               Cho YSOF Trong Tương Lai
             </span>
-            <span className="inline-block animate-pulse ml-2">💙</span>
+            <span className="inline-block animate-pulse ml-2 items-center">💙</span>
           </motion.h1>
         </motion.div>
         
